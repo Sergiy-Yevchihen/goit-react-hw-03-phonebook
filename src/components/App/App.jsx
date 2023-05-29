@@ -28,13 +28,13 @@ class App extends Component {
       localStorage.setItem('contacts', JSON.stringify(contacts));
     }
   }
-
+// Notify.success
   handleAddContact = newContact => {
     this.setState(
       ({ contacts }) => ({
         contacts: [...contacts, newContact],
       }),
-      () => Notify.success('Contact is added to the phonebook')
+      () => alert('Contact is added to the phonebook')
     );
   };
 
