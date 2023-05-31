@@ -21,15 +21,39 @@ class App extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_prevProps, prevState) {
     const { contacts } = this.state;
 
     if (prevState.contacts !== contacts) {
       localStorage.setItem('contacts', JSON.stringify(contacts));
     }
   }
-// Notify.success
+  // Notify.success
+  // handleAddContact = newContact => {
+  //   this.setState(
+  //     ({ contacts }) => ({
+  //       contacts: [...contacts, newContact],
+  //     }),
+  //     () => Notify.success('Contact is added to the phonebook')
+  //   );
+  // };
+
   handleAddContact = newContact => {
+    const { contacts } = this.state;
+
+    const isExistContact = !!contacts.find(
+      contact => contact.name === newContact.name
+    );
+
+    if (isExistContact) {
+      Notify.failure('Contact already exists');
+      return !isExistContact;
+    }
+
+    const isValidateForm = this.validateForm(newContact);
+
+    if (!isValidateForm) return;
+
     this.setState(
       ({ contacts }) => ({
         contacts: [...contacts, newContact],
@@ -38,17 +62,44 @@ class App extends Component {
     );
   };
 
-  handleCheckUniqueContact = name => {
-    const { contacts } = this.state;
+  validateForm = newContact => {
+    const { name, number } = newContact;
 
-    const isExistContact = !!contacts.find(contact => contact.name === name);
-
-    if (isExistContact) {
-      Notify.failure('Contact already exists');
+    if (!name || !number) {
+      Notify.failure('Some field is empty');
+      return false;
     }
 
-    return !isExistContact;
+    return true;
   };
+  //   handleAddContact = newContact => {
+  //   const { contacts } = this.state;
+
+  //   const isExistContact = !!contacts.find(contact => contact.name === newContact.name);
+
+  //   if (isExistContact) {
+  //     Notify.failure('Contact already exists');
+  //     return;
+  //   }
+
+  //   this.setState(
+  //     ({ contacts }) => ({
+  //       contacts: [...contacts, newContact],
+  //     }),
+  //     () => alert('Contact is added to the phonebook')
+  //   );
+  // };
+  // handleCheckUniqueContact = name => {
+  //   const { contacts } = this.state;
+
+  //   const isExistContact = !!contacts.find(contact => contact.name === name);
+
+  //   if (isExistContact) {
+  //     Notify.failure('Contact already exists');
+  //   }
+
+  //   return !isExistContact;
+  // };
 
   handleRemoveContact = id => {
     this.setState(
@@ -78,7 +129,7 @@ class App extends Component {
         <Section title="Phonebook">
           <ContactForm
             onAdd={this.handleAddContact}
-            onCheckUnique={this.handleCheckUniqueContact}
+            // onCheckUnique={this.handleCheckUniqueContact}
           />
         </Section>
         <Section title="Contacts">

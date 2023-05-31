@@ -2,7 +2,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, FormLabel, Input } from './ContactForm.styled';
 import { nanoid } from 'nanoid';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+// import { Notify } from 'notiflix/build/notiflix-notify-aio';
 const INITIAL_STATE = {
   name: '',
   number: '',
@@ -21,25 +21,25 @@ class ContactForm extends Component {
 
     const { name, number } = this.state;
     const { onAdd } = this.props;
-    const isValidateForm = this.validateForm();
+    // const isValidateForm = this.validateForm();
 
-    if (!isValidateForm) return;
+    // if (!isValidateForm) return;
 
     onAdd({ id: nanoid(), name, number });
     this.resetForm();
   };
 
-  validateForm = () => {
-    const { name, number } = this.state;
-    const { onCheckUnique } = this.props;
+  // validateForm = () => {
+  //   const { name, number } = this.state;
+  //   // const { onCheckUnique } = this.props;
 
-    if (!name || !number) {
-      Notify.failure('Some field is empty');
-      return false;
-    }
-
-    return onCheckUnique(name);
-  };
+  //   if (!name || !number) {
+  //     Notify.failure('Some field is empty');
+  //     return false;
+  //   }
+// onCheckUnique(name)
+  //   return true;
+  // };
 
   resetForm = () => this.setState(INITIAL_STATE);
 
