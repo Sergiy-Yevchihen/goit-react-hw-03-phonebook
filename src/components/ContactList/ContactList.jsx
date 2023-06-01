@@ -1,19 +1,11 @@
 import PropTypes from 'prop-types';
+import ContactListItem from '../ContactListItem/ContactListItem';
 
 import {
-  ButtonDelete,
-  ContactListLi,
+  
   ContactListBox,
 } from './ContactList.styled';
 
-const ContactListItem = ({ id, name, number, onRemove }) => {
-  return (
-    <ContactListLi>
-      {name}: {number}
-      <ButtonDelete onClick={() => onRemove(id)}>Delete</ButtonDelete>
-    </ContactListLi>
-  );
-};
 
 const ContactList = ({ contacts, onRemove }) => {
   if (contacts.length === 0) return null;
@@ -27,12 +19,7 @@ const ContactList = ({ contacts, onRemove }) => {
   );
 };
 
-ContactListItem.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
-  onRemove: PropTypes.func,
-};
+
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
@@ -42,5 +29,6 @@ ContactList.propTypes = {
   onRemove: PropTypes.func,
 };
 
-export default ContactList;
+// export default ContactList;
 
+export { ContactList };

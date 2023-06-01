@@ -4,7 +4,8 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { GlobalStyle } from '../theme/GlobalStyle.styled';
 import ContactForm from '../ContactForm/ContactForm';
 import Section from '../Section';
-import ContactList from '../ContactList';
+import { ContactList } from '../ContactList/ContactList';
+// import ContactList from '../ContactList';
 import Filter from '../Filter';
 
 class App extends Component {
@@ -28,15 +29,7 @@ class App extends Component {
       localStorage.setItem('contacts', JSON.stringify(contacts));
     }
   }
-  // Notify.success
-  // handleAddContact = newContact => {
-  //   this.setState(
-  //     ({ contacts }) => ({
-  //       contacts: [...contacts, newContact],
-  //     }),
-  //     () => Notify.success('Contact is added to the phonebook')
-  //   );
-  // };
+  
 
   handleAddContact = newContact => {
     const { contacts } = this.state;
@@ -72,34 +65,7 @@ class App extends Component {
 
     return true;
   };
-  //   handleAddContact = newContact => {
-  //   const { contacts } = this.state;
-
-  //   const isExistContact = !!contacts.find(contact => contact.name === newContact.name);
-
-  //   if (isExistContact) {
-  //     Notify.failure('Contact already exists');
-  //     return;
-  //   }
-
-  //   this.setState(
-  //     ({ contacts }) => ({
-  //       contacts: [...contacts, newContact],
-  //     }),
-  //     () => alert('Contact is added to the phonebook')
-  //   );
-  // };
-  // handleCheckUniqueContact = name => {
-  //   const { contacts } = this.state;
-
-  //   const isExistContact = !!contacts.find(contact => contact.name === name);
-
-  //   if (isExistContact) {
-  //     Notify.failure('Contact already exists');
-  //   }
-
-  //   return !isExistContact;
-  // };
+  
 
   handleRemoveContact = id => {
     this.setState(
@@ -129,7 +95,7 @@ class App extends Component {
         <Section title="Phonebook">
           <ContactForm
             onAdd={this.handleAddContact}
-            // onCheckUnique={this.handleCheckUniqueContact}
+           
           />
         </Section>
         <Section title="Contacts">
